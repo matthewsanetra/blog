@@ -7,7 +7,6 @@ template = "page.html"
 
 [extra]
 toc = true
-math = true
 +++
 
 Time feels like its speeding up exponentially fast. My weeks feel as if they go by 10x as fast as they did even just a year ago. And those felt like they went by twice as fast as the year before that.
