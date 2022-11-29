@@ -194,6 +194,7 @@ katex_bundle = "katexbundle.min.js"
 keywords = "Matthew Sanetra, Matthew, Sanetra, programming, blog, programming blog, Rust, Rust language, Rust blog" # used for the primary site index
 twitter = "mm_atthew" # used for twitter related
 #google = "Your Google Site verification code."
+google_analytics = "G-04RF9YE6LR" # Google Analytics Tag ID
 #bing = "Your Bing Site verification code."
 seo = true  # enable or disable seo-related meta tags: opengraph, facebook, twitter
 
