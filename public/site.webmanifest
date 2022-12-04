@@ -1,7 +1,7 @@
 {
-    "name": "Abridge Zola Theme",
-    "short_name": "Abridge",
-    "description": "Fast & Lightweight Zola Theme",
+    "name": "Matthew Sanetra",
+    "short_name": "mattsanetra.uk",
+    "description": "A small, personal programming blog by Matthew Sanetra",
     "start_url": "/index.html",
     "scope": "/",
     "background_color": "#111111",
@@ -17,12 +17,6 @@
             "src": "/android-chrome-512x512.png",
             "sizes": "512x512",
             "type": "image/png"
-        },
-        {
-            "src": "/android-chrome-192x192m.png",
-            "sizes": "192x192",
-            "type": "image/png",
-            "purpose": "maskable"
         }
     ]
 }
