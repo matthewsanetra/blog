@@ -12,8 +12,8 @@ feed_filename = "atom.xml"
 #ignored_content = ["*.{graphml,xlsx}", "temp.*"]
 #hard_link_static = false # set to true to hard link instead of copying, useful for very large files.
 taxonomies = [
-    {name = "categories", feed = true},
-    {name = "tags", feed = true},
+    # {name = "categories", feed = true},
+    # {name = "tags", feed = true},
 ]
 
 theme = "abridge"
