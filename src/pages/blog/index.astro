@@ -1,0 +1,31 @@
+---
+import BlogPost from "@layouts/BlogPost.astro";
+import { getCollection } from "astro:content";
+
+const posts = await getCollection("blog");
+// Make sure most recent post appears first
+posts.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+---
+
+<BlogPost
+  frontmatter={{
+    title: "Blog",
+    description: "Browse the blog posts written by Matthew Sanetra",
+  }}
+>
+  <h1>Blog</h1>
+  <ul>
+    {
+      posts.map((post) => (
+        <li>
+          <div class="flex gap-x-4 flex-wrap m-0">
+            <time datetime={post.data.date.toISOString()}>
+              {post.data.date.toISOString().split("T")[0]}
+            </time>
+            <a href={"/blog/" + post.slug + "/"}>{post.data.title}</a>
+          </div>
+        </li>
+      ))
+    }
+  </ul>
+</BlogPost>
