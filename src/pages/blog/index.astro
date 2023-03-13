@@ -22,7 +22,7 @@ posts.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
             <time datetime={post.data.date.toISOString()}>
               {post.data.date.toISOString().split("T")[0]}
             </time>
-            <a href={"/blog/" + post.slug + "/"}>{post.data.title}</a>
+            <a href={`/blog/${post.slug}/`}>{post.data.title}</a>
           </div>
         </li>
       ))
