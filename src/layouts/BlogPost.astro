@@ -29,13 +29,13 @@ const { frontmatter } = Astro.props;
       {...frontmatter}
     />
   </head>
-  <body class="bg-yellow-50">
+  <body class="bg-yellow-50 overflow-x-hidden">
     <a
       href="#_main-content"
       class="font-serif transition left-0 bg-primary text-primary-content absolute p-3 m-3 -translate-y-16 focus:translate-y-0"
       >Skip to main content</a
     >
-    <div class="mx-auto max-w-screen-md px-4 font-serif overflow-x-hidden">
+    <div class="mx-auto max-w-screen-md px-4 font-serif">
       <Header />
       <main id="_main-content">
         <article class="prose prose-a:underline-offset-2">
