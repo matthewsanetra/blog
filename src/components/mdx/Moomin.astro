@@ -1,0 +1,43 @@
+---
+import { z } from "astro:content";
+
+const Props = z.object({
+  which: z.enum(["muminek"]),
+  side: z.enum(["left", "right"]),
+});
+export type Props = z.infer<typeof Props>;
+
+const { which, side } = Props.parse(Astro.props);
+
+const images = {
+  muminek: "/images/moomins/muminek-sitting.svg",
+};
+
+const isRight = side === "right";
+const image = images[which];
+---
+
+<div
+  class:list={[
+    "flex items-end justify-end -mt-8",
+    !isRight ? "flex-row-reverse" : "",
+  ]}
+>
+  <div
+    class:list={[
+      "rounded-3xl border border-b-2 border-gray-500 bg-slate-50 px-3 text-gray-800 prose-p:m-3",
+      isRight ? "border-r-2" : "border-l-2",
+    ]}
+  >
+    <slot />
+  </div>
+  <div class:list={["not-prose -mb-10", isRight ? "-mr-32" : "-ml-32"]}>
+    <div class="w-32">
+      <img
+        alt="Muminek"
+        class:list={isRight ? "-scale-x-100" : ""}
+        src={image}
+      />
+    </div>
+  </div>
+</div>
