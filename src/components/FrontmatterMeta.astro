@@ -9,18 +9,6 @@ export interface Props {
 const { title, description, defaultImage, image } = Astro.props;
 const imageURL = image ?? defaultImage;
 const fullImageURL = new URL(imageURL, Astro.site).toString();
-
-if (title.length > 70) {
-  throw new Error(
-    `Title is too long for Twitter card. It should be less than 70 characters: ${title}`
-  );
-}
-
-if (description.length > 200) {
-  throw new Error(
-    `Description is too long for Twitter card. It should be less than 200 characters: ${description}`
-  );
-}
 ---
 
 <title>{title}</title>
