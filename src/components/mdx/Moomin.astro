@@ -19,7 +19,7 @@ const image = images[which];
 
 <div
   class:list={[
-    "flex items-end justify-end -mt-8",
+    "flex items-end justify-end",
     !isRight ? "flex-row-reverse" : "",
   ]}
 >
@@ -31,13 +31,11 @@ const image = images[which];
   >
     <slot />
   </div>
-  <div class:list={["not-prose -mb-10", isRight ? "-mr-32" : "-ml-32"]}>
-    <div class="w-32">
-      <img
-        alt="Muminek"
-        class:list={isRight ? "-scale-x-100" : ""}
-        src={image}
-      />
-    </div>
+  <div class:list={["not-prose -mb-10 -mt-10", isRight ? "-mr-32" : "-ml-32"]}>
+    <img
+      alt="Muminek"
+      class:list={["w-32", isRight ? "-scale-x-100" : ""]}
+      src={image}
+    />
   </div>
 </div>
