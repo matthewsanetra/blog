@@ -1,0 +1,96 @@
+---
+title: "Scheduled deployments on a budget"
+description: "How I added future post scheduling to my completely static website"
+date: 2023-03-16
+---
+
+import Moomin from "@components/mdx/Moomin.astro";
+
+# Scheduled deployments on a budget
+
+I'm a big fan of [Cloudflare Pages](https://pages.dev/).
+In fact, this page is built in a limited Beta version of their containers that a Cloudflare
+employee had to manually opt me in to.
+
+I'd really like to schedule a time for when new posts would go live but I don't want to resort
+to having a server processing every request and rendering (with caching ofcourse).
+
+<Moomin which="muminek" side="right">
+  Static websites are just cooler!
+</Moomin>
+
+My solution? Push everything to `main` and set up a `cron` job to POST to a [Deploy Hook](https://developers.cloudflare.com/pages/platform/deploy-hooks) daily.
+
+<Moomin which="muminek" side="left">
+  D-did you just say *push to __main__*?
+</Moomin>
+
+Yep. Breaking prod is not possible with a static website.
+If the build fails, it just doesn't get uploaded to the edge.
+
+<Moomin which="muminek" side="right">
+  But to have a `cron` job you need a server or a Raspberry Pi or something, right?
+</Moomin>
+
+Nope. I'm too broke for any of that. I'm using [cron-job.org](https://cron-job.org/).
+
+## Selectively generating
+
+Scheduling deployments is only half of the problem - we must now make sure scheduled
+posts aren't generated until the scheduled date!
+
+I'm using [Astro v2](https://astro.build/) and use the amazing
+[content collections](https://docs.astro.build/en/guides/content-collections/)
+feature, and so I just need to make a wrapper over `getCollection("...")`:
+
+```ts
+export async function entries() {
+  const all = await getCollection("blog");
+  const posts = all.filter((post) => !ignore(post));
+
+  posts.forEach((post) => updatePublishTime(post.data.date));
+
+  // Make sure most recent post appears first
+  posts.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+  return posts;
+}
+```
+
+where we define whether to ignore based on the post's date:
+
+```ts
+function ignore(post: CollectionEntry<"blog">) {
+  return post.data.date > new Date();
+}
+```
+
+<Moomin which="muminek" side="left">
+ That's... *surprisingly* easy!
+</Moomin>
+
+Yep! And now we can even inject the scheduled deployment time! [^1]
+[^1]: At the time of writing this post, the time only shows up on the RSS feed.
+
+```ts
+function updatePublishTime(date: Date) {
+  // Month index below is 0-indexed, day index is not
+  if (date >= new Date(2023, 2, 15, 0, 0, 0, 0)) {
+    // Since 2023-03-15, we are initiating deployment at 15:00 UTC,
+    // so change post publish date to reflect that.
+
+    date.setUTCHours(15);
+    date.setUTCMinutes(0);
+    date.setUTCSeconds(0);
+    date.setUTCMilliseconds(0);
+  }
+}
+```
+
+## Conclusion
+
+- I'm crazy and (for this website) exclusively push to `main`.
+- Why? Because it *literally* cannot go wrong.
+- It's free
+
+*-- Matthew*
