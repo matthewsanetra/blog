@@ -14,8 +14,11 @@ const formattedDate = stringifiedDate.split("T")[0];
 
 <div class="py-2">
   <div class="border-gray-500 border-l-2 px-3">
-    <a href={link} class="">
-      <time class="italic float-right pl-2" datetime={stringifiedDate}>
+    <a href={link}>
+      <time
+        class="italic float-right pl-2 text-gray-500"
+        datetime={stringifiedDate}
+      >
         {formattedDate}
       </time>
       <div>

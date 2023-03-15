@@ -1,7 +1,8 @@
 ---
+import { getCollection } from "astro:content";
+
 import BlogPost from "@layouts/BlogPost.astro";
 import BlogListEntry from "@components/BlogListEntry.astro";
-import { getCollection } from "astro:content";
 
 const posts = await getCollection("blog");
 // Make sure most recent post appears first
@@ -16,7 +17,7 @@ posts.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 >
   <h1>Blog</h1>
   <div class="not-prose">
-    <ul class="list-none">
+    <ol class="list-none">
       {
         posts.map((post) => (
           <li>
@@ -24,6 +25,6 @@ posts.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
           </li>
         ))
       }
-    </ul>
+    </ol>
   </div>
 </BlogPost>
