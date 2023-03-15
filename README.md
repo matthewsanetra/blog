@@ -20,5 +20,5 @@ To make a new post, simply create a new file in `src/content/blog/`. The frontma
 
 ## Tentative wants
 
-- [ ] Add post description to blog index page
+- [x] Add post description to blog index page
 - [ ] Add dark mode + toggle
