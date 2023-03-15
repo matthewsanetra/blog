@@ -1,9 +1,10 @@
 ---
 import BlogPost from "@layouts/BlogPost.astro";
-import { getCollection } from "astro:content";
+import { entries } from "src/schemas/blog";
 
 export async function getStaticPaths() {
-  const posts = await getCollection("blog");
+  const posts = await entries();
+
   return posts.map((post) => ({
     params: { slug: post.slug },
     props: { post },

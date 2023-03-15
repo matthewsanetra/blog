@@ -1,17 +1,18 @@
 import type { APIContext } from "astro";
-import { getCollection } from "astro:content";
 
 import rss from "@astrojs/rss";
+
+import { entries } from "src/schemas/blog";
 
 export async function get(context: APIContext) {
   // See https://docs.astro.build/en/reference/api-reference/#contextsite
   const site = context.site?.toString() ?? "not possible";
 
-  const posts = await getCollection("blog");
+  const posts = await entries();
 
   return rss({
     title: "Matthew Sanetra's Blog",
-    description: "A blog about a student's adventures programming.",
+    description: "Join me on my adventures in software development",
     site,
     items: posts.map((post) => ({
       title: post.data.title,

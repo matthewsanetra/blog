@@ -25,5 +25,4 @@ deploy whenever an urgent change is needed.
 
 ## Tentative wants
 
-- [x] Add post description to blog index page
 - [ ] Add dark mode + toggle

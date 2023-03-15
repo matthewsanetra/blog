@@ -3,10 +3,9 @@ import { getCollection } from "astro:content";
 
 import BlogPost from "@layouts/BlogPost.astro";
 import BlogListEntry from "@components/BlogListEntry.astro";
+import { entries } from "src/schemas/blog";
 
-const posts = await getCollection("blog");
-// Make sure most recent post appears first
-posts.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+const posts = await entries();
 ---
 
 <BlogPost
