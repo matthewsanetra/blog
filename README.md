@@ -8,6 +8,11 @@ and I think it's a great minimalistic template.
 
 To make a new post, simply create a new file in `src/content/blog/`. The frontmatter schema is defined in [src/content/config.ts](./src/content/config.ts).
 
+# Scheduled deployments
+
+This blog is deployed to [Cloudflare Pages](https://pages.dev/) and I have a `cron` job set to deploy daily at 15:00 UTC. I can also manually
+deploy whenever an urgent change is needed.
+
 # TODO
 
 ## Defo wants
