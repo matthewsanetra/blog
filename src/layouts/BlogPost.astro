@@ -38,7 +38,9 @@ const { frontmatter } = Astro.props;
     <div class="mx-auto max-w-screen-md px-4 font-serif">
       <Header />
       <main id="_main-content">
-        <article class="prose prose-a:underline-offset-2">
+        <article
+          class="prose prose-a:underline-offset-2 prose-pre:border prose-pre:border-slate-500"
+        >
           <slot />
         </article>
       </main>
