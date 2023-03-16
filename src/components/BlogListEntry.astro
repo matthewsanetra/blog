@@ -1,20 +1,19 @@
 ---
-export interface Props {
+import type { CollectionEntry } from "astro:content";
+
+export type Props = CollectionEntry<"blog">["data"] & {
   link: string;
-  title: string;
-  description: string;
-  date: Date;
-}
+};
 
-const { link, date, title, description } = Astro.props;
+const post = Astro.props;
 
-const stringifiedDate = date.toISOString();
+const stringifiedDate = post.date.toISOString();
 const formattedDate = stringifiedDate.split("T")[0];
 ---
 
 <div class="py-2">
   <div class="border-gray-500 border-l-2 px-3">
-    <a href={link}>
+    <a href={post.link}>
       <time
         class="italic float-right pl-2 text-gray-500"
         datetime={stringifiedDate}
@@ -23,10 +22,10 @@ const formattedDate = stringifiedDate.split("T")[0];
       </time>
       <div>
         <span class="underline underline-offset-2 font-extrabold text-gray-800"
-          >{title}</span
+          >{post.titleHeadingOverride ?? post.title}</span
         >
         <p class="p-0 m-0">
-          {description}
+          {post.description}
         </p>
       </div>
     </a>
