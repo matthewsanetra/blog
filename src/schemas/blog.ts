@@ -12,9 +12,9 @@ export const schema = z.object({
 
 export async function entries() {
   const all = await getCollection("blog");
-  const posts = all.filter((post) => !ignore(post));
+  const filtered = all.filter((post) => !ignore(post));
 
-  posts.forEach((post) => updatePublishTime(post.data.date));
+  const posts = filtered.map((post) => withUpdatedPublishTime(post));
 
   // Make sure most recent post appears first
   posts.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
@@ -26,7 +26,9 @@ function ignore(post: CollectionEntry<"blog">) {
   return post.data.date > new Date();
 }
 
-function updatePublishTime(date: Date) {
+function withUpdatedPublishTime(post: CollectionEntry<"blog">) {
+  const date = new Date(post.data.date);
+
   // Month index below is 0-indexed, day index is not
   if (date >= new Date(2023, 2, 15, 0, 0, 0, 0)) {
     // Since 2023-03-15, we are initiating deployment at 15:00 UTC,
@@ -37,4 +39,6 @@ function updatePublishTime(date: Date) {
     date.setUTCSeconds(0);
     date.setUTCMilliseconds(0);
   }
+
+  return { ...post, data: { ...post.data, date } };
 }
