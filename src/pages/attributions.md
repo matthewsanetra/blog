@@ -4,8 +4,6 @@ title: "Attributions"
 description: "Credit for software, fonts and art in use on this website"
 ---
 
-# Attributions
-
 ## Software
 
 - [Astro](https://astro.build/), for the amazing static site building experience.

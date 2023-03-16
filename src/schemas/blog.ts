@@ -3,9 +3,12 @@ import { z, getCollection } from "astro:content";
 
 export const schema = z.object({
   title: z.string().max(70, { message: "Title is too long for Twitter card" }),
+  titleHeadingOverride: z.string().optional(),
+
   description: z
     .string()
     .max(200, { message: "Description is too long for Twitter card" }),
+
   date: z.date(),
   image: z.string().optional(),
 });
