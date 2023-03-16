@@ -18,7 +18,7 @@ deploy whenever an urgent change is needed.
 ## Defo wants
 
 - [ ] Add estimated reading time
-- [ ] Add publish date to individual posts
+- [x] Add publish date to individual posts
 - [ ] Add bionic reading toggle
 - [ ] Add multiple characters
 - [ ] Add multiple images/poses per character

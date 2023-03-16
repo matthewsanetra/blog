@@ -16,6 +16,8 @@ export interface Props {
 }
 
 const { frontmatter } = Astro.props;
+
+const heading = frontmatter.titleHeadingOverride ?? frontmatter.title;
 ---
 
 <html lang="en" class="overflow-x-hidden">
@@ -42,7 +44,21 @@ const { frontmatter } = Astro.props;
         <article
           class="prose prose-a:underline-offset-2 prose-pre:border prose-pre:border-slate-500"
         >
-          <h1>{frontmatter.titleHeadingOverride ?? frontmatter.title}</h1>
+          <h1 class:list={frontmatter.date ? "mb-0" : ""}>{heading}</h1>
+          {
+            frontmatter.date && (
+              <time
+                class="text-gray-500"
+                datetime={frontmatter.date.toISOString()}
+              >
+                {frontmatter.date.toLocaleDateString("en-US", {
+                  year: "numeric",
+                  month: "long",
+                  day: "numeric",
+                })}
+              </time>
+            )
+          }
           <slot />
         </article>
       </main>
