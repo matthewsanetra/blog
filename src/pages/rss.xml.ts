@@ -12,7 +12,8 @@ export async function get(context: APIContext) {
 
   return rss({
     title: "Matthew Sanetra's Blog",
-    description: "Join me on my adventures in software development",
+    description:
+      "Hello! I'm a Computer Scientist at Magdalen College, University of Oxford. This is my personal blog - come join me on my adventures!",
     site,
     items: posts.map((post) => ({
       title: post.data.title,
