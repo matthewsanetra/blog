@@ -1,11 +1,7 @@
 ---
 import type { CollectionEntry } from "astro:content";
 
-import Fonts from "@components/Fonts.astro";
-import Meta from "@components/Meta.astro";
-import FrontmatterMeta from "@components/FrontmatterMeta.astro";
-import Header from "@components/Header.astro";
-import Footer from "@components/Footer.astro";
+import SharedLayout from "./SharedLayout.astro";
 
 export interface Props {
   // In content, we want to make dates mandatory.
@@ -20,49 +16,28 @@ const { frontmatter } = Astro.props;
 const heading = frontmatter.headingOverride ?? frontmatter.title;
 ---
 
-<html lang="en" class="overflow-x-hidden">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="generator" content={Astro.generator} />
-    <Fonts />
-    <Meta />
-    <FrontmatterMeta
-      defaultImage="/images/default-social-preview.png"
-      {...frontmatter}
-    />
-  </head>
-  <body class="bg-yellow-50 overflow-x-hidden">
-    <a
-      href="#_main-content"
-      class="font-serif transition left-0 bg-primary text-primary-content absolute p-3 m-3 -translate-y-16 focus:translate-y-0"
-      >Skip to main content</a
-    >
-    <div class="mx-auto max-w-screen-md px-4 font-serif">
-      <Header />
-      <main id="_main-content">
-        <article
-          class="prose prose-a:underline-offset-2 prose-pre:border prose-pre:border-slate-500"
-        >
-          <h1 class:list={frontmatter.date ? "mb-0" : ""}>{heading}</h1>
-          {
-            frontmatter.date && (
-              <time
-                class="text-gray-500"
-                datetime={frontmatter.date.toISOString()}
-              >
-                {frontmatter.date.toLocaleDateString("en-US", {
-                  year: "numeric",
-                  month: "long",
-                  day: "numeric",
-                })}
-              </time>
-            )
-          }
-          <slot />
-        </article>
-      </main>
-      <Footer />
-    </div>
-  </body>
-</html>
+<SharedLayout
+  meta={{
+    title: frontmatter.title,
+    description: frontmatter.description,
+    image: frontmatter.image,
+  }}
+>
+  <article
+    class="prose prose-a:underline-offset-2 prose-pre:border prose-pre:border-slate-500"
+  >
+    <h1 class:list={frontmatter.date ? "mb-0" : ""}>{heading}</h1>
+    {
+      frontmatter.date && (
+        <time class="text-gray-500" datetime={frontmatter.date.toISOString()}>
+          {frontmatter.date.toLocaleDateString("en-US", {
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+          })}
+        </time>
+      )
+    }
+    <slot />
+  </article>
+</SharedLayout>
