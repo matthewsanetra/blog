@@ -29,5 +29,6 @@ export type RootPageEntry = CollectionEntry<"root">;
 export type RootPageData = CollectionEntry<"root">["data"];
 
 export async function entries() {
-  return await getCollection("root");
+  const pages: RootPageEntry[] = await getCollection("root");
+  return pages;
 }

@@ -45,7 +45,7 @@ export type BlogEntry = CollectionEntry<"blog">;
 export type BlogData = CollectionEntry<"blog">["data"];
 
 export async function entries() {
-  const all = await getCollection("blog");
+  const all: BlogEntry[] = await getCollection("blog");
 
   // Filter out posts that are scheduled to be published in the future
   const filtered = all.filter((post) => !ignore(post));
