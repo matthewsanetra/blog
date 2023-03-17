@@ -1,4 +1,6 @@
 ---
+import type { BlogEntry } from "@schemas/blog";
+
 import BlogPost from "@layouts/BlogPost.astro";
 import { entries } from "@schemas/blog";
 
@@ -11,10 +13,12 @@ export async function getStaticPaths() {
   }));
 }
 
+export type Props = { post: BlogEntry };
+
 const { post } = Astro.props;
 const { Content } = await post.render();
 ---
 
-<BlogPost frontmatter={post.data}>
+<BlogPost {...post.data}>
   <Content />
 </BlogPost>

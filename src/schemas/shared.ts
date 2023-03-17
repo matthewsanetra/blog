@@ -9,6 +9,9 @@ export const sharedSchema = z.object({
     .string()
     .min(15, { message: "Below Bing recommended title length" })
     .max(70, { message: "Title is too long for Twitter card" }),
+
+  // If we want a different page heading than the title that appears
+  // in the meta tags, we can override it here.
   headingOverride: z.string().optional(),
 
   // From Bing Webmaster tools,

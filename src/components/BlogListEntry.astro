@@ -1,7 +1,7 @@
 ---
-import type { CollectionEntry } from "astro:content";
+import type { BlogData } from "@schemas/blog";
 
-export type Props = CollectionEntry<"blog">["data"] & {
+export type Props = BlogData & {
   link: string;
 };
 
@@ -22,10 +22,10 @@ const formattedDate = stringifiedDate.split("T")[0];
       </time>
       <div>
         <span class="underline underline-offset-2 font-extrabold text-gray-800"
-          >{post.headingOverride ?? post.title}</span
+          >{post.heading}</span
         >
         <p class="p-0 m-0">
-          {post.description}
+          {post.meta.description}
         </p>
       </div>
     </a>
