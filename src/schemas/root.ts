@@ -15,7 +15,7 @@ export const schema = frontmatter
       return z.unknown();
     })
   )
-  // Process overrides and shape in to useful format
+  // Process overrides and shape into useful format
   .transform((data) => ({
     meta: {
       title: data.title,

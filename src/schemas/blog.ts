@@ -30,6 +30,7 @@ export const schema = frontmatter
       date.setUTCMilliseconds(0);
     }
 
+    // Process overrides and shape into useful format
     return {
       meta: {
         title: data.title,
@@ -51,9 +52,8 @@ export async function entries() {
   const filtered = all.filter((post) => !ignore(post));
 
   // Make sure most recent post appears first
-  filtered.sort(
-    ({ data: a }, { data: b }) => b.date.valueOf() - a.date.valueOf()
-  );
+  const key = ({ data: { date } }: BlogEntry) => date.valueOf();
+  filtered.sort((a, b) => key(b) - key(a));
 
   return filtered;
 }
