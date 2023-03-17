@@ -1,5 +1,6 @@
 import type { CollectionEntry } from "astro:content";
-import { z } from "astro:content";
+import { z, getCollection } from "astro:content";
+
 import { sharedSchema } from "./shared";
 
 const frontmatter = sharedSchema.extend({
@@ -26,3 +27,7 @@ export const schema = frontmatter
 
 export type RootPageEntry = CollectionEntry<"root">;
 export type RootPageData = CollectionEntry<"root">["data"];
+
+export async function entries() {
+  return await getCollection("root");
+}

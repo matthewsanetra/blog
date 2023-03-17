@@ -58,6 +58,7 @@ export async function entries() {
   return filtered;
 }
 
-function ignore(post: CollectionEntry<"blog">) {
+function ignore(post: BlogEntry) {
+  // Ignore clearly scheduled posts
   return post.data.date > new Date();
 }
