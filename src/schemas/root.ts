@@ -25,4 +25,4 @@ export const schema = frontmatter
   }));
 
 export type RootPageEntry = CollectionEntry<"root">;
-export type RootPageInfo = CollectionEntry<"root">["data"];
+export type RootPageData = CollectionEntry<"root">["data"];

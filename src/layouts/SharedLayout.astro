@@ -5,9 +5,9 @@ import FrontmatterMeta from "@components/FrontmatterMeta.astro";
 import Header from "@components/Header.astro";
 import Footer from "@components/Footer.astro";
 
-import type { RootPageInfo } from "@schemas/root";
+import type { RootPageData } from "@schemas/root";
 
-export type Props = { meta: RootPageInfo["meta"] };
+export type Props = { meta: RootPageData["meta"] };
 
 const { meta } = Astro.props;
 ---
