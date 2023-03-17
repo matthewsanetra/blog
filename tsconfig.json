@@ -9,6 +9,9 @@
       "@layouts/*": [
         "src/layouts/*"
       ],
+      "@schemas/*": [
+        "src/schemas/*"
+      ]
     }
   }
 }
