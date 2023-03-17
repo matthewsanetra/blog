@@ -1,17 +1,19 @@
 ---
-import BlogPost from "@layouts/BlogPost.astro";
+import RootPage from "@layouts/RootPage.astro";
 import BlogListEntry from "@components/BlogListEntry.astro";
+
 import { entries } from "@schemas/blog";
+import { schema } from "@schemas/root";
 
 const posts = await entries();
 ---
 
-<BlogPost
-  frontmatter={{
-    title: "Blog Posts | Matthew Sanetra",
-    titleHeadingOverride: "Blog",
-    description: "Browse the blog posts written by Matthew Sanetra",
-  }}
+<RootPage
+  {...schema.parse({
+  title: "Blog Posts | Matthew Sanetra",
+  headingOverride: "Blog",
+  description: "Browse the blog posts written by Matthew Sanetra",
+})}
 >
   <div class="not-prose">
     <ol class="list-none">
@@ -24,4 +26,4 @@ const posts = await entries();
       }
     </ol>
   </div>
-</BlogPost>
+</RootPage>

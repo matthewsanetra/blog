@@ -12,12 +12,12 @@ export interface Props {
   // However, in the layout, we want to make them optional because
   // this layout is used by the home page and other pages, which don't
   // want a date.
-  frontmatter: Omit<CollectionEntry<"blog">["data"], "date"> & { date?: Date };
+  frontmatter: CollectionEntry<"blog">["data"];
 }
 
 const { frontmatter } = Astro.props;
 
-const heading = frontmatter.titleHeadingOverride ?? frontmatter.title;
+const heading = frontmatter.headingOverride ?? frontmatter.title;
 ---
 
 <html lang="en" class="overflow-x-hidden">

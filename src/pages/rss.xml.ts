@@ -16,7 +16,7 @@ export async function get(context: APIContext) {
       "Hello! I'm a Computer Scientist at Magdalen College, University of Oxford. This is my personal blog - come join me on my adventures!",
     site,
     items: posts.map((post) => ({
-      title: post.data.titleHeadingOverride ?? post.data.title,
+      title: post.data.headingOverride ?? post.data.title,
       description: post.data.description,
       pubDate: post.data.date,
       link: `/blog/${post.slug}/`,
