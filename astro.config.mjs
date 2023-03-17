@@ -14,4 +14,9 @@ export default defineConfig({
       theme: "github-light",
     },
   },
+  vite: {
+    build: {
+      cssCodeSplit: false,
+    },
+  },
 });
