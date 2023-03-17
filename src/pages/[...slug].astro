@@ -1,0 +1,30 @@
+---
+import { getCollection } from "astro:content";
+
+import type { RootPageEntry } from "@schemas/root";
+import RootPage from "@layouts/RootPage.astro";
+
+export async function getStaticPaths() {
+  const pages = await getCollection("root");
+
+  return pages.map((page) => ({
+    params: {
+      slug:
+        // If the page is the index page, we have to make slug `undefined`
+        // so that the URL is `/` instead of `/index`.
+        // See: https://docs.astro.build/en/core-concepts/routing/#static-routes:~:text=(Setting%20the%20rest%20parameter%20to%20undefined%20allows%20it%20to%20match%20the%20top%20level%20page.)
+        page.slug == "index" ? undefined : page.slug,
+    },
+    props: { page },
+  }));
+}
+
+export type Props = { page: RootPageEntry };
+
+const { page } = Astro.props;
+const { Content } = await page.render();
+---
+
+<RootPage {...page.data}>
+  <Content />
+</RootPage>
