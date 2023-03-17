@@ -7,7 +7,7 @@ module.exports = {
     extend: {
       fontFamily: {
         serif: ["Lora", ...defaultTheme.fontFamily.serif],
-        mono: ["'Fragment Mono'", ...defaultTheme.fontFamily.mono],
+        mono: ['"Fragment Mono"', ...defaultTheme.fontFamily.mono],
       },
     },
   },
