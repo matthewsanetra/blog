@@ -9,9 +9,7 @@ export type Props = z.infer<typeof Props>;
 
 const { which, side } = Props.parse(Astro.props);
 
-const images = {
-  muminek: "/images/moomins/muminek-sitting.svg",
-};
+import images from "./images";
 
 const isRight = side === "right";
 const image = images[which];
