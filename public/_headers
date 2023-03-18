@@ -11,3 +11,9 @@
 
 /_astro/*
   Cache-Control: public, max-age=31536000
+
+# Fonts aren't currently handled by Astro, but they have version
+# numbers in them.
+
+/fonts/*
+  Cache-Control: public, max-age=31536000
