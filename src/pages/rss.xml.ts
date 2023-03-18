@@ -15,11 +15,11 @@ export async function get(context: APIContext) {
     description:
       "Hello! I'm a Computer Scientist at Magdalen College, University of Oxford. This is my personal blog - come join me on my adventures!",
     site,
-    items: posts.map((post) => ({
-      title: post.data.heading,
-      description: post.data.meta.description,
-      pubDate: post.data.date,
-      link: `/blog/${post.slug}/`,
+    items: posts.map(({ data, slug }) => ({
+      title: data.heading,
+      description: data.meta.description,
+      pubDate: data.date,
+      link: `/blog/${slug}/`,
     })),
   });
 }
