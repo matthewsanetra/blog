@@ -1,0 +1,72 @@
+---
+title: "Astro makes caching so easy 🤌"
+description: "How hashes in filenames make Astro assets 🚀"
+date: 2023-03-19
+---
+
+import Moomin from "@components/mdx/Moomin.astro";
+
+When you import assets in [Astro](https://astro.build/), it does something special -
+it renames them to include a short hash and moves them to `/_astro/`.
+
+It is such a simple thing but it is so incredibly powerful.
+This is a post on how I used this fact to make this website the fastest
+it can possibly be.
+
+---
+
+## Cloudflare Pages cache invalidation
+
+Every time I deploy this site, Cloudflare Pages invalidates
+every file from their cache, including assets that haven't changed.
+
+<Moomin which="muminek" side="right">
+  Don't you [deploy daily](/blog/scheduling-on-a-budget/)?
+</Moomin>
+
+Yep, and every day I visit my site I can see the fonts being redownloaded.
+
+__*But there's hope!*__ Cloudflare Pages allows us to set our own headers
+by making a `_headers` file described [here](https://developers.cloudflare.com/pages/platform/headers).
+
+Recall that the assets have hashes in their names - it means if the assets change,
+the web pages will reference different file paths - fetching them!
+
+Combined with the fact that they are all in their own special directory,
+the solution is as simple as this:
+
+```
+/_astro/*
+  Cache-Control: public, max-age=31536000
+```
+
+*mwah* 🤌
+
+---
+
+## 31536000 seconds?
+
+<Moomin which="muminek" side="left">
+  That's one year!
+</Moomin>
+
+You see, I've never had to deal with `Cache-Control` before, but
+when researching, I found this in [RFC 2616](https://www.ietf.org/rfc/rfc2616.txt):
+
+> To mark a response as “never expires,” an origin server sends an
+> Expires date approximately one year from the time the response is
+> sent. HTTP/1.1 servers SHOULD NOT send Expires dates more than one
+> year in the future.
+
+I then went to Google and checked the network tab, and that's exactly what they do.
+Good enough&trade; for me.
+
+---
+
+## Conclusion
+
+- Astro is awesome
+- Cloudflare Pages is awesome
+- ~~I'm awesome~~
+
+*-- Matthew*
