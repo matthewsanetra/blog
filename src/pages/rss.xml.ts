@@ -1,6 +1,6 @@
 import type { APIContext } from "astro";
 
-import rss from "@astrojs/rss";
+import { Feed } from "feed";
 
 import { entries } from "@schemas/blog";
 
@@ -8,18 +8,42 @@ export async function get(context: APIContext) {
   // See https://docs.astro.build/en/reference/api-reference/#contextsite
   const site = context.site?.toString() ?? "not possible";
 
-  const posts = await entries();
-
-  return rss({
+  const feed = new Feed({
     title: "Matthew Sanetra's Blog",
     description:
       "Hello! I'm a Computer Scientist at Magdalen College, University of Oxford. This is my personal blog - come join me on my adventures!",
-    site,
-    items: posts.map(({ data, slug }) => ({
-      title: data.heading,
-      description: data.meta.description,
-      pubDate: data.date,
-      link: `/blog/${slug}/`,
-    })),
+    id: site,
+    link: site,
+    copyright: `All rights reserved ${new Date().getFullYear()}, Matthew Sanetra`,
+    language: "en",
+    generator: "Astro",
+    author: {
+      name: "Matthew Sanetra",
+      email: "matthewsanetra@gmail.com",
+    },
+    feedLinks: {
+      rss: site + "rss.xml",
+    },
   });
+
+  const posts = await entries();
+
+  for (const { data, slug } of posts) {
+    feed.addItem({
+      title: data.heading,
+      link: `/blog/${slug}/`,
+      description: data.meta.description,
+      date: data.date,
+      author: [
+        {
+          name: "Matthew Sanetra",
+          email: "matthewsanetra@gmail.com",
+        },
+      ],
+    });
+  }
+
+  return {
+    body: feed.rss2(),
+  };
 }
