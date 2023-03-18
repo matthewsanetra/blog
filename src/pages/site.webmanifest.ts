@@ -18,7 +18,7 @@ const icons = [
   },
 ];
 
-export async function get(context: APIContext) {
+export async function get(_context: APIContext) {
   return {
     body: JSON.stringify({
       name: "Matthew Sanetra",
