@@ -1,12 +1,16 @@
 ---
+// Favicons and site.webmanifest ported from favicon.io to use Astro assets
+import apple_touch_icon from "../assets/favicons/apple-touch-icon.png";
+import favicon_32x32 from "../assets/favicons/favicon-32x32.png";
+import favicon_16x16 from "../assets/favicons/favicon-16x16.png";
 ---
 
 <link rel="canonical" href={Astro.url.href} />
 <link rel="sitemap" href="/sitemap-index.xml" />
 
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
-<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+<link rel="apple-touch-icon" sizes="180x180" href={apple_touch_icon} />
+<link rel="icon" type="image/png" sizes="32x32" href={favicon_32x32} />
+<link rel="icon" type="image/png" sizes="16x16" href={favicon_16x16} />
 <link rel="manifest" href="/site.webmanifest" />
 
 <meta name="theme-color" content="#fefce8" />
