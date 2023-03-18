@@ -1,14 +1,15 @@
 ---
+import { previews } from "@components/mdx/socialPreviews";
+
 export interface Props {
   title: string;
   description: string;
-  defaultImage: string;
-  image?: string;
+  socialPreview: keyof typeof previews;
 }
 
-const { title, description, defaultImage, image } = Astro.props;
-const imageURL = image ?? defaultImage;
-const fullImageURL = new URL(imageURL, Astro.site).toString();
+const { title, description, socialPreview } = Astro.props;
+
+const imageURL = new URL(previews[socialPreview], Astro.site).toString();
 ---
 
 <title>{title}</title>
@@ -17,8 +18,8 @@ const fullImageURL = new URL(imageURL, Astro.site).toString();
 <meta name="twitter:creator" content="@mm_atthew" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:description" content={description} />
-<meta name="twitter:image" content={fullImageURL} />
+<meta name="twitter:image" content={imageURL} />
 <meta property="og:url" content={Astro.url.href} />
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
-<meta property="og:image" content={fullImageURL} />
+<meta property="og:image" content={imageURL} />

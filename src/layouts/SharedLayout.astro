@@ -19,10 +19,7 @@ const { meta } = Astro.props;
     <meta name="generator" content={Astro.generator} />
     <Fonts />
     <Meta />
-    <FrontmatterMeta
-      defaultImage="/images/default-social-preview.png"
-      {...meta}
-    />
+    <FrontmatterMeta {...meta} />
   </head>
   <body class="bg-yellow-50 overflow-x-hidden">
     <a
