@@ -15,23 +15,15 @@ const frontmatter = sharedSchema.extend({
     .transform((preview) => preview as keyof typeof previews),
 });
 
-export const schema = frontmatter
-  // Using `strict` throws an error inside Astro, so we use `catchall` instead
-  .catchall(
-    z.lazy(() => {
-      console.warn("Unknown frontmatter key");
-      return z.unknown();
-    })
-  )
+export const schema = frontmatter.strict().transform((data) => ({
   // Process overrides and shape into useful format
-  .transform((data) => ({
-    meta: {
-      title: data.title,
-      description: data.description,
-      socialPreview: data.socialPreview,
-    },
-    heading: data.headingOverride ?? data.title,
-  }));
+  meta: {
+    title: data.title,
+    description: data.description,
+    socialPreview: data.socialPreview,
+  },
+  heading: data.headingOverride ?? data.title,
+}));
 
 export type RootPageEntry = CollectionEntry<"root">;
 export type RootPageData = CollectionEntry<"root">["data"];
