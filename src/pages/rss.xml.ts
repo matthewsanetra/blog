@@ -7,7 +7,7 @@ import { entries } from "@schemas/blog";
 export async function get(context: APIContext) {
   // See https://docs.astro.build/en/reference/api-reference/#contextsite
   const site = context.site?.toString() ?? "not possible";
-  const year = new Date().getFullYear();
+  const year = new Date().getUTCFullYear();
 
   const feed = new Feed({
     title: "Matthew Sanetra's Blog",
@@ -34,7 +34,8 @@ export async function get(context: APIContext) {
       title: data.heading,
       link: `/blog/${slug}/`,
       description: data.meta.description,
-      date: data.date,
+      date: data.meta.lastModified ?? data.date,
+      published: data.date,
       author: [
         {
           name: "Matthew Sanetra",

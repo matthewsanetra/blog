@@ -21,6 +21,7 @@ export const schema = frontmatter.strict().transform((data) => ({
     title: data.title,
     description: data.description,
     socialPreview: data.socialPreview,
+    lastModified: data.lastModified,
   },
   heading: data.headingOverride ?? data.title,
 }));

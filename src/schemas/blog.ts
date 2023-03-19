@@ -24,10 +24,7 @@ export const schema = frontmatter.strict().transform((data) => {
     // Since 2023-03-15, we are initiating deployment at 15:00 UTC,
     // so change post publish date to reflect that.
 
-    date.setUTCHours(15);
-    date.setUTCMinutes(0);
-    date.setUTCSeconds(0);
-    date.setUTCMilliseconds(0);
+    date.setUTCHours(15, 0, 0, 0);
   }
 
   // Process overrides and shape into useful format
@@ -36,6 +33,7 @@ export const schema = frontmatter.strict().transform((data) => {
       title: data.title,
       description: data.description,
       socialPreview: data.socialPreview,
+      lastModified: data.lastModified,
     },
     heading: data.headingOverride ?? data.title,
     date,
@@ -58,7 +56,39 @@ export async function entries() {
   return filtered;
 }
 
-function ignore(post: BlogEntry) {
+function ignore(post: BlogEntry): boolean {
   // Ignore clearly scheduled posts
-  return post.data.date > new Date();
+
+  const now = new Date();
+
+  const postDate = post.data.date;
+  if (postDate <= now) {
+    return false;
+  }
+
+  const cutoff = new Date();
+  cutoff.setUTCHours(14, 55, 0, 0);
+
+  if (isScheduledForToday(postDate) && now >= cutoff) {
+    // If it's after 14:55 UTC, we are initiating deployment at 15:00 UTC,
+    // so don't ignore posts scheduled to be published at 15:00 UTC.
+
+    return false;
+  }
+
+  return true;
+}
+
+function isScheduledForToday(date: Date): boolean {
+  const now = new Date();
+
+  const today = new Date(
+    now.getUTCFullYear(),
+    now.getUTCMonth(),
+    now.getUTCDate()
+  );
+
+  const tomorrow = new Date(today.valueOf() + 24 * 60 * 60 * 1000);
+
+  return date >= today && date < tomorrow;
 }

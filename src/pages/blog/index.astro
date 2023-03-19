@@ -13,6 +13,7 @@ const posts = await entries();
   title: "Blog Posts | Matthew Sanetra",
   headingOverride: "Blog",
   description: "Browse the blog posts written by Matthew Sanetra",
+  lastModified: posts.at(0)?.data.date ?? new Date(2023, 2, 17),
 })}
 >
   <div class="not-prose">

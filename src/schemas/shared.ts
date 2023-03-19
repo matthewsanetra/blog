@@ -21,4 +21,6 @@ export const sharedSchema = z.object({
     .string()
     .min(25, { message: "Below Bing recommended description length" })
     .max(160, { message: "Above Bing recommended description length" }),
+
+  lastModified: z.date().optional(),
 });
