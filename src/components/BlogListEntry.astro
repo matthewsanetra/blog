@@ -12,19 +12,19 @@ const formattedDate = stringifiedDate.split("T")[0];
 ---
 
 <div class="py-2">
-  <div class="border-gray-500 border-l-2 px-3">
+  <div class="border-l-2 border-gray-500 px-3">
     <a href={post.link}>
       <time
-        class="italic float-right pl-2 text-gray-500"
+        class="float-right pl-2 italic text-gray-500"
         datetime={stringifiedDate}
       >
         {formattedDate}
       </time>
       <div>
-        <span class="underline underline-offset-2 font-extrabold text-gray-800"
+        <span class="font-extrabold text-gray-800 underline underline-offset-2"
           >{post.heading}</span
         >
-        <p class="p-0 m-0">
+        <p class="m-0 p-0">
           {post.meta.description}
         </p>
       </div>
