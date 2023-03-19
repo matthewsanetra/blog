@@ -23,7 +23,7 @@ export async function get(context: APIContext) {
       email: "matthewsanetra@gmail.com",
     },
     feedLinks: {
-      rss: site + "rss.xml",
+      rss: new URL("/rss.xml", site).href,
     },
   });
 
@@ -32,7 +32,7 @@ export async function get(context: APIContext) {
   for (const { data, slug } of posts) {
     feed.addItem({
       title: data.heading,
-      link: `/blog/${slug}/`,
+      link: new URL(`/blog/${slug}/`, site).href,
       description: data.meta.description,
       date: data.meta.lastModified ?? data.date,
       published: data.date,
