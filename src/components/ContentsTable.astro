@@ -1,0 +1,29 @@
+---
+import type { MarkdownHeading } from "astro";
+
+export interface Props {
+  headings: MarkdownHeading[];
+}
+
+const { headings } = Astro.props;
+---
+
+<div class="not-prose pt-4">
+  <div class="rounded-sm border border-gray-500 bg-white p-4">
+    <h2 class="text-2xl font-semibold text-gray-800">Contents</h2>
+    <ol class="ml-4 list-outside list-decimal p-1">
+      {
+        headings.map((heading) => (
+          <li>
+            <a
+              href={`#${heading.slug}`}
+              class="font-semibold text-gray-800 underline underline-offset-2"
+            >
+              {heading.text}
+            </a>
+          </li>
+        ))
+      }
+    </ol>
+  </div>
+</div>
