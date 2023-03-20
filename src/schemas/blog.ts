@@ -14,6 +14,7 @@ const frontmatter = sharedSchema.extend({
     .default("default")
     .refine((preview) => Object.keys(previews).includes(preview))
     .transform((preview) => preview as keyof typeof previews),
+  toc: z.boolean().default(false),
 });
 
 export const schema = frontmatter.strict().transform((data) => {
@@ -37,6 +38,7 @@ export const schema = frontmatter.strict().transform((data) => {
     },
     heading: data.headingOverride ?? data.title,
     date,
+    toc: data.toc,
   };
 });
 
