@@ -1,0 +1,19 @@
+---
+import BlogListEntry from "@components/BlogListEntry.astro";
+
+import { entries } from "@schemas/blog";
+
+const posts = await entries();
+---
+
+<div class="not-prose">
+  <ol class="list-none">
+    {
+      posts.map((post) => (
+        <li>
+          <BlogListEntry {...post.data} link={`/blog/${post.slug}/`} />
+        </li>
+      ))
+    }
+  </ol>
+</div>
