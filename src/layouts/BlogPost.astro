@@ -42,5 +42,18 @@ const page = Astro.props;
     </span>
     {page.toc && <ContentsTable headings={page.headings} />}
     <slot />
+    <hr />
+    <h2>Comments</h2>
+    <div class="not-prose">
+      <script
+        src="https://utteranc.es/client.js"
+        repo="matthewsanetra/blog"
+        issue-term="title"
+        label="comment thread"
+        theme="github-light"
+        crossorigin="anonymous"
+        async
+      ></script>
+    </div>
   </article>
 </SharedLayout>
