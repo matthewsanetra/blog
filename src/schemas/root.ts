@@ -3,7 +3,7 @@ import { z, getCollection } from "astro:content";
 
 import { sharedSchema } from "./shared";
 
-// Importing with @alias doesn't work inside content/config.ts for some reason.
+// Importing with ~alias doesn't work inside content/config.ts for some reason.
 // (this file is imported there)
 import { previews } from "../components/mdx/socialPreviews";
 

@@ -1,4 +1,4 @@
-import defaultPreview from "@assets/socialPreviews/default.png";
+import defaultPreview from "~assets/socialPreviews/default.png";
 
 export const previews = {
   default: defaultPreview,

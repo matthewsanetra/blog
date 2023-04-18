@@ -1,5 +1,5 @@
 ---
-import { getNavbarList } from "@schemas/root";
+import { getNavbarList } from "~schemas/root";
 
 const pages = await getNavbarList();
 const navbarList = [
@@ -16,7 +16,7 @@ const navbarList = [
 ---
 
 <header>
-  <div class="pt-4 pb-8">
+  <div class="pb-8 pt-4">
     <span class="text-4xl font-extrabold">Matthew Sanetra</span>
     <div
       class="flex flex-wrap gap-x-4 border-b border-b-gray-400 py-1 underline-offset-2"

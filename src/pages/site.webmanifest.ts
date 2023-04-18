@@ -2,8 +2,8 @@
 
 import type { APIContext } from "astro";
 
-import android_chrome_192x192 from "@assets/favicons/android-chrome-192x192.png";
-import android_chrome_512x512 from "@assets/favicons/android-chrome-512x512.png";
+import android_chrome_192x192 from "~assets/favicons/android-chrome-192x192.png";
+import android_chrome_512x512 from "~assets/favicons/android-chrome-512x512.png";
 
 const icons = [
   {

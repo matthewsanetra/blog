@@ -1,9 +1,11 @@
 ---
-import ContentsTable from "@components/ContentsTable.astro";
-import type { BlogData } from "@schemas/blog";
 import type { MarkdownHeading } from "astro";
 
+import type { BlogData } from "~schemas/blog";
+
 import SharedLayout from "./SharedLayout.astro";
+
+import ContentsTable from "~components/ContentsTable.astro";
 
 export type Props = BlogData & { headings: MarkdownHeading[] };
 

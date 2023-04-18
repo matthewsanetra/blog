@@ -1,8 +1,8 @@
 ---
-import type { BlogEntry } from "@schemas/blog";
+import type { BlogEntry } from "~schemas/blog";
 
-import BlogPost from "@layouts/BlogPost.astro";
-import { entries } from "@schemas/blog";
+import BlogPost from "~layouts/BlogPost.astro";
+import { entries } from "~schemas/blog";
 
 export async function getStaticPaths() {
   const posts = await entries();

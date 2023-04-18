@@ -2,7 +2,7 @@ import type { APIContext } from "astro";
 
 import { Feed } from "feed";
 
-import { entries } from "@schemas/blog";
+import { entries } from "~schemas/blog";
 
 export async function get(context: APIContext) {
   // See https://docs.astro.build/en/reference/api-reference/#contextsite
