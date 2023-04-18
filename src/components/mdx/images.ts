@@ -33,6 +33,7 @@ export default {
     side: "right",
     alt: "Intrigued Alpaca",
   },
+
   "frog-confused": {
     image: frog_confused_svg,
     side: "left",
@@ -48,6 +49,7 @@ export default {
     side: "left",
     alt: "Intrigued Frog",
   },
+
   "rabbit-confused": {
     image: rabbit_confused_svg,
     side: "left",
