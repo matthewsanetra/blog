@@ -1,0 +1,35 @@
+---
+import { z } from "astro:content";
+
+const Props = z.object({
+  which: z.enum(["alpaca", "frog", "rabbit"]),
+  emotion: z.enum(["confused", "excited", "intrigued"]),
+});
+export type Props = z.infer<typeof Props>;
+
+const { which, emotion } = Props.parse(Astro.props);
+
+import images from "./images";
+
+const { image, side, alt } = images[`${which}-${emotion}`];
+const isRight = side == "right";
+---
+
+<div
+  class:list={[
+    "flex items-end justify-end",
+    !isRight ? "flex-row-reverse" : "",
+  ]}
+>
+  <div
+    class:list={[
+      "rounded-3xl border border-b-2 border-gray-500 bg-slate-50 px-3 text-gray-800 prose-p:m-3 w-fit",
+      isRight ? "border-r-2" : "border-l-2",
+    ]}
+  >
+    <slot />
+  </div>
+  <div class:list={["not-prose -mb-10 -mt-10", isRight ? "-mr-32" : "-ml-32"]}>
+    <img alt={alt} class:list={["w-32", "h-32"]} src={image} />
+  </div>
+</div>
