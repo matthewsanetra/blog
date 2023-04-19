@@ -1,0 +1,83 @@
+{
+  "Alpaca Confused": {
+    "prefix": "alpaca-confused",
+    "body": [
+      "<Char which=\"alpaca\" emotion=\"confused\">",
+      "\t$0",
+      "</Char>"
+    ],
+    "description": "Alpaca Confused"
+  },
+  "Alpaca Intrigued": {
+    "prefix": "alpaca-intrigued",
+    "body": [
+      "<Char which=\"alpaca\" emotion=\"intrigued\">",
+      "\t$0",
+      "</Char>"
+    ],
+    "description": "Alpaca Intrigued"
+  },
+  "Alpaca Excited": {
+    "prefix": "alpaca-excited",
+    "body": [
+      "<Char which=\"alpaca\" emotion=\"excited\">",
+      "\t$0",
+      "</Char>"
+    ],
+    "description": "Alpaca Excited"
+  },
+  "Frog Confused": {
+    "prefix": "frog-confused",
+    "body": [
+      "<Char which=\"frog\" emotion=\"confused\">",
+      "\t$0",
+      "</Char>"
+    ],
+    "description": "Frog Confused"
+  },
+  "Frog Intrigued": {
+    "prefix": "frog-intrigued",
+    "body": [
+      "<Char which=\"frog\" emotion=\"intrigued\">",
+      "\t$0",
+      "</Char>"
+    ],
+    "description": "Frog Intrigued"
+  },
+  "Frog Excited": {
+    "prefix": "frog-excited",
+    "body": [
+      "<Char which=\"frog\" emotion=\"excited\">",
+      "\t$0",
+      "</Char>"
+    ],
+    "description": "Frog Excited"
+  },
+  "Rabbit Confused": {
+    "prefix": "rabbit-confused",
+    "body": [
+      "<Char which=\"rabbit\" emotion=\"confused\">",
+      "\t$0",
+      "</Char>"
+    ],
+    "description": "Rabbit Confused"
+  },
+  "Rabbit Intrigued": {
+    "prefix": "rabbit-intrigued",
+    "body": [
+      "<Char which=\"rabbit\" emotion=\"intrigued\">",
+      "\t$0",
+      "</Char>"
+    ],
+    "description": "Rabbit Intrigued"
+  },
+  "Rabbit Excited": {
+    "prefix": "rabbit-excited",
+    "body": [
+      "<Char which=\"rabbit\" emotion=\"excited\">",
+      "\t$0",
+      "</Char>"
+    ],
+    "description": "Rabbit Excited"
+  },
+}
