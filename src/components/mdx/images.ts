@@ -65,4 +65,4 @@ export default {
     side: "right",
     alt: "Intrigued Rabbit",
   },
-};
+} as const;
