@@ -24,8 +24,8 @@ export async function get(_context: APIContext) {
       name: "Matthew Sanetra",
       short_name: "Matthew Sanetra",
       icons,
-      theme_color: "#fefce8",
-      background_color: "#fefce8",
+      theme_color: "#fcfcf0",
+      background_color: "#fcfcf0",
       display: "standalone",
     }),
   };
