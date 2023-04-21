@@ -3,6 +3,9 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
+      "~mdx/*": [
+        "src/components/mdx/*"
+      ],
       "~*": [
         "src/*"
       ]
