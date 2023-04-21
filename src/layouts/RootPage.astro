@@ -8,10 +8,6 @@ const page = Astro.props;
 ---
 
 <SharedLayout meta={page.meta}>
-  <article
-    class="prose prose-a:underline-offset-2 prose-code:font-medium prose-pre:border prose-pre:border-slate-500"
-  >
-    <h1>{page.heading}</h1>
-    <slot />
-  </article>
+  <h1>{page.heading}</h1>
+  <slot />
 </SharedLayout>
