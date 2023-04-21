@@ -21,48 +21,48 @@ export default {
   "alpaca-confused": {
     image: alpaca_confused_svg,
     side: "left",
-    alt: "Confused Alpaca",
+    alt: "Alpaca",
   },
   "alpaca-excited": {
     image: alpaca_excited_svg,
     side: "left",
-    alt: "Excited Alpaca",
+    alt: "Alpaca",
   },
   "alpaca-intrigued": {
     image: alpaca_intrigued_svg,
     side: "right",
-    alt: "Intrigued Alpaca",
+    alt: "Alpaca",
   },
 
   "frog-confused": {
     image: frog_confused_svg,
     side: "left",
-    alt: "Confused Frog",
+    alt: "Frog",
   },
   "frog-excited": {
     image: frog_excited_svg,
     side: "right",
-    alt: "Excited Frog",
+    alt: "Frog",
   },
   "frog-intrigued": {
     image: frog_intrigued_svg,
     side: "left",
-    alt: "Intrigued Frog",
+    alt: "Frog",
   },
 
   "rabbit-confused": {
     image: rabbit_confused_svg,
     side: "left",
-    alt: "Confused Rabbit",
+    alt: "Rabbit",
   },
   "rabbit-excited": {
     image: rabbit_excited_svg,
     side: "right",
-    alt: "Excited Rabbit",
+    alt: "Rabbit",
   },
   "rabbit-intrigued": {
     image: rabbit_intrigued_svg,
     side: "right",
-    alt: "Intrigued Rabbit",
+    alt: "Rabbit",
   },
 } as const;
