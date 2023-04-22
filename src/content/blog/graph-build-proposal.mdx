@@ -1,0 +1,196 @@
+---
+title: "Piper: A proposal for a graphy pipe-based build system"
+description: "A proposal for a build system that remains simple, readable, and expands upon Make."
+date: 2023-04-23
+---
+
+import Char from "~mdx/Char.astro";
+
+<Char which="alpaca" emotion="intrigued">
+  Yet *__another__* build system?
+</Char>
+
+Hear me out! This one is simple!! No need to add separate support for different
+languages, we just write what commands we want to execute.
+
+<Char which="frog" emotion="confused">
+  Isn't that just Make?
+</Char>
+
+Yep! But what if we add **mappings** and **collections**?
+
+This post is just a proposal and some ideas that I brainstormed to
+make a build system that is easy to use for any language, without having
+to learn anything complicated.
+
+The name I have in mind for this is **Piper**.
+
+## Motivation
+
+I was recently experimenting with a tool that converted one file into another,
+and then that *new* file had to be aggregated with files of the same type
+in the arguments of yet another command.
+
+It seems complicated, but it's solved easily with a bash script:
+
+```bash
+#!/bin/bash
+shopt -s nullglob  # Prevents awful globbing behaviour if no files match
+for file in *.ext; do
+  echo "Processing $file"
+  ./convert -o "${file%.ext}.new" "$file"
+done
+echo "Aggregating files"
+./final -o final *.new
+```
+
+<Char which="rabbit" emotion="intrigued">
+  So why do we need something new?
+</Char>
+
+There are a few downsides of rawdogging it with bash:
+
+- No parallelism unless you try *really really* hard.
+  I'm not bothered to do it while writing this example.
+- You'd be insane to add incremental compilation.
+- No way to visualise the build graph.
+- It's not cross-platform.
+- It's hard to read.
+
+These are things that can be handled for you very easily
+with a syntax very similar to Make -- *without* its pain-points.
+
+## Observations
+
+We can see that there are two types of transformations:
+- **Mappings:** 1-1 transformations, like converting a file to another file.
+- **Collections:** N-1 transformations, like aggregating files into one.
+
+<Char which="alpaca" emotion="excited">
+  What about 1-N?
+</Char>
+
+While it is true that there can be a 1-N transformation
+in a single command, I've found that it isn't very common
+and this can be a later addition. I'll reserve something along the lines of **Generators** for these transformations. 
+
+Alas, let's prototype some syntax!
+
+## Syntax
+
+### Commands
+
+Like Make, we will make `ident:` represent a runnable command.
+However, unlike Make, we will not be putting other commands in body.
+Instead, we will declare the series of mappings and collections
+to perform on groups of files.
+
+E.g:
+```
+build:
+  .c --[CC]-> .o --{AR}-> lib.a
+```
+
+Note:
+- We use `[ident]` to represent a mapping and `{ident}` to represent a collection.
+- We use `.ext` as a shorthand for glob `*.ext`.
+
+It's important to also provide a way for the user to specify custom glob patterns,
+but we're in 2023 so lets do it with regexes. The above is
+equivalent to:
+
+```
+build:
+  r(.*\.c) --[CC]-> r(.*\.o) --{AR}-> lib.a
+```
+
+Because `CC` is a mapping, it auto infers that the output filename is the same,
+just with a different extension. A full filename is required for the output of collections.
+
+<Char which="rabbit" emotion="excited">
+  This has potential!
+</Char>
+
+### Mapping & Collection Definitions
+
+`[ident]:` and `{ident}:` respectively:
+
+```
+[CC]:
+  cc -o $_OUT $_IN
+
+{AR}:
+  ar rcs $_OUT $_IN
+```
+
+Note:
+ - Variables begin with `$`, more on that in the next section.
+ - Special *"inserted"* variables are prefixed with `$_`.
+
+These are the only inserted rules:
+ - `$_OUT`: The output filename, including file extension.
+ - `$_IN`: The input filename(s), including file extension.
+   - For collections, this is a space separated list of filenames.
+ - `$_{0..9999}`: Regex group matches, if the input is a regex.
+   - `$_0` is the entire match, always equal to `$_IN`. You can think of this
+     as because of the outer brackets in the regex expressions above.
+   - In collections, each variable is a space separated list of the respective
+     group.
+
+### Variables
+
+Variables begin with a `$`. They are defined as such:
+
+```
+$A = this is a literal
+$B = "this is a literal"
+```
+
+<Char which="alpaca" emotion="confused">
+  What about variables that are the output of a command?
+</Char>
+
+We can use the `$(command)` syntax:
+
+```
+$C = $(echo "this is a literal")
+```
+
+`$A`, `$B` and `$C` are identical.
+
+*__Note__:* Variables can only be substituted. In essence, they are lazily evaluated.
+If you reference `$C` twice, it will be executed twice.
+
+Variables are scoped. If you define a variable in a command, it will only live for the
+duration of that command.
+
+You can use variables to also define file types,
+e.g.
+
+```
+$SRC = .c
+$OBJ = r(.*\.o)
+```
+
+I'm still debating internally if `$A` should be allowed as there can potentially be a conflict with `$SRC`.
+
+## Conclusion
+
+I believe this can be a very simple, but powerful, build description language.
+
+- Parallel jobs can be easily determined by both the user and the tool.
+- Incremental compilation is trivial due to each mapping having a single input and output,
+  with the output file name being known before it is generated.
+- It is intuitive, and easy to read.
+- It can most definitely be cross-platform
+  - Although, this is a bit of a moot point, it all depends on the build commands used.
+    Only pointing this out because `bash` is not cross-platform.
+- No need for a tool to generate a graph - it's right there!
+  Although the appropriate software can still be written.
+
+This is just a "proposal", I haven't written any software for this, and my opinions may change.
+I haven't spent much time on this at all and I'm sure there are many things I've missed, and many things that could be improved.
+I'd love to hear your thoughts!
+
+
+*-- Matthew*
