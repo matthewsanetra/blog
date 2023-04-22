@@ -4,7 +4,7 @@ description: "How hashes in filenames make Astro assets 🚀"
 date: 2023-03-19
 ---
 
-import Moomin from "~mdx/Moomin.astro";
+import Char from "~mdx/Char.astro";
 
 When you import assets in [Astro](https://astro.build/), it does something special -
 it renames them to include a short hash and moves them to `/_astro/`.
@@ -20,9 +20,9 @@ it can possibly be.
 Every time I deploy this site, Cloudflare Pages invalidates
 every file from their cache, including assets that haven't changed.
 
-<Moomin which="muminek" side="right">
+<Char which="rabbit" emotion="confused">
   Don't you [deploy daily](/blog/scheduling-on-a-budget/)?
-</Moomin>
+</Char>
 
 Yep, and every day I visit my site I can see the fonts being redownloaded.
 
@@ -46,9 +46,9 @@ the solution is as simple as this:
 
 ## 31536000 seconds?
 
-<Moomin which="muminek" side="left">
+<Char which="rabbit" emotion="excited">
   That's one year!
-</Moomin>
+</Char>
 
 You see, I've never had to deal with `Cache-Control` before, but
 when researching, I found this in [RFC 2616](https://www.ietf.org/rfc/rfc2616.txt):

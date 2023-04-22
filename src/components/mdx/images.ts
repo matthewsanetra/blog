@@ -1,8 +1,6 @@
 // Importing assets within MDX files didn't work for me,
 // so I created this file to import them and export them as a module.
 
-import muminekSitting from "~assets/moomins/muminek-sitting.svg";
-
 import alpaca_confused_svg from "~assets/characters/alpaca-confused.svg";
 import alpaca_excited_svg from "~assets/characters/alpaca-excited.svg";
 import alpaca_intrigued_svg from "~assets/characters/alpaca-intrigued.svg";
@@ -16,8 +14,6 @@ import rabbit_excited_svg from "~assets/characters/rabbit-excited.svg";
 import rabbit_intrigued_svg from "~assets/characters/rabbit-intrigued.svg";
 
 export default {
-  muminek: muminekSitting,
-
   "alpaca-confused": {
     image: alpaca_confused_svg,
     side: "left",

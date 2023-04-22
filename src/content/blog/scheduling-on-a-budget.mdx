@@ -5,7 +5,7 @@ date: 2023-03-16
 lastModified: 2023-03-20
 ---
 
-import Moomin from "~mdx/Moomin.astro";
+import Char from "~mdx/Char.astro";
 
 __*EDIT:*__  I no longer use cron-job.org, I instead use a custom
 Cloudflare Worker, which I published here: [deploy-worker](https://github.com/matthewsanetra/deploy-worker).
@@ -17,22 +17,18 @@ employee had to manually opt me in to.
 I'd really like to schedule a time for when new posts would go live but I don't want to resort
 to having a server processing every request and rendering (with caching ofcourse).
 
-<Moomin which="muminek" side="right">
-  Static websites are just cooler!
-</Moomin>
-
 My solution? Push everything to `main` and set up a `cron` job to POST to a [Deploy Hook](https://developers.cloudflare.com/pages/platform/deploy-hooks) daily.
 
-<Moomin which="muminek" side="left">
+<Char which="rabbit" emotion="excited">
   D-did you just say *push to __main__*?
-</Moomin>
+</Char>
 
 Yep. Breaking prod is not possible with a static website.
 If the build fails, it just doesn't get uploaded to the edge.
 
-<Moomin which="muminek" side="right">
+<Char which="rabbit" emotion="confused">
   But to have a `cron` job you need a server or a Raspberry Pi or something, right?
-</Moomin>
+</Char>
 
 Nope. I'm too broke for any of that. I'm using [cron-job.org](https://cron-job.org/).
 
@@ -67,9 +63,9 @@ function ignore(post: CollectionEntry<"blog">) {
 }
 ```
 
-<Moomin which="muminek" side="left">
- That's... *surprisingly* easy!
-</Moomin>
+<Char which="alpaca" emotion="intrigued">
+  That's.. *surprisingly* easy!
+</Char>
 
 Yep! And now we can even inject the scheduled deployment time! [^1]
 [^1]: At the time of writing this post, the time only shows up on the RSS feed.
