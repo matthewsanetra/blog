@@ -9,7 +9,14 @@ import compress from "astro-compress";
 // https://astro.build/config
 export default defineConfig({
   site: "https://mattsanetra.uk/",
-  integrations: [mdx(), tailwind(), sitemap(), compress()],
+  integrations: [
+    mdx(),
+    tailwind(),
+    sitemap(),
+    compress({
+      logger: 1,
+    }),
+  ],
   markdown: {
     shikiConfig: {
       theme: "github-light",
