@@ -1,0 +1,216 @@
+---
+title: "Bye LaTeX! Hello Typst!"
+description: "Typst is much more ergonomic and pleasant to work with than LaTeX."
+date: 2023-04-25
+---
+
+import Char from "~mdx/Char.astro";
+
+I was lucky enough to be part of the [Typst](https://typst.app/home) closed-beta,
+and since my first week of trying it, I migrated fully away from LaTeX.
+
+It features:
+- incremental compilation!
+- live preview!
+- [open-source code](https://github.com/typst/typst)!
+- *almost* perfect typesetting!
+
+<Char which="alpaca" emotion="intrigued">
+  I bet it isn't written in Rust.
+</Char>
+
+*Oh, wouldn't you know!*
+
+**It is.**
+
+I've been using Typst for everything, including:
+- my problem sheets
+- my resume
+- anything I would otherwise use Word for.
+
+Yep, not only did it replace LaTeX for me, but also Word!
+
+To demonstrate the power of it, I'm sharing my Resume along with
+its template, which was styled after this website.
+
+Read more about Typst in the [Typst Docs](https://typst.app/docs/)!
+
+[Download my Resume here](https://mattsanetra.uk/resume.pdf).
+
+*-- Matthew*
+
+*Psst: I'm looking for a job! I'm based in London but happy with
+on-site, hybrid, and remote.*
+
+---
+
+## My Resume Template
+
+### `template.typ`
+
+```
+#let resume(
+  name: "Name",
+  website: (link: "https://example.com", display: "example.com"),
+  phone: "+44 7123 45FAKE",
+  email: "hi@example.com",
+  github: (username: "username", display: "@username"),
+  body
+) = {
+  set text(font: "Lora", size: 12pt)
+  set document(author: name, title: name + " - Resume")
+
+  show link: it => {
+    set text(fill: rgb(17, 24, 39), weight: 500)
+    underline(offset: 2pt)[#it]
+  }
+
+  show heading.where(level: 1): it => {
+    line(length: 100%)
+    v(-14pt)
+    it
+    v(-14pt)
+    line(length: 100%)
+  }
+
+  set list(marker: [--])
+
+  // Name
+  {
+    set text(size: 22pt, weight: 800)
+    name
+  }
+
+  v(-13pt)
+
+  stack(
+    dir: ltr,
+    spacing: 1em,
+    link(website.link, website.display),
+    phone,
+    link("mailto:" + email, email),
+    link("https://github.com/" + github.username, github.display)
+  )
+
+  body
+}
+
+#let experience(
+  name: "Experience Name",
+  where: "Location",
+  date: "Dec 2012 - Present",
+  body
+) = {
+  stack(dir: ltr,
+    {
+      set text(size: 12pt)
+      [*#name,* #where]
+    },
+    {
+      set text(size: 10pt)
+      set align(right)
+      [*#date*]
+    }
+  )
+  
+  set text(size: 10pt)
+  
+  body
+}
+```
+
+### `main.typ`
+
+```
+#import "template.typ": *
+
+#show: resume.with(
+  name: "Matthew Sanetra",
+  website: (
+    link: "https://mattsanetra.uk",
+    display: "mattsanetra.uk"
+  ),
+  phone: "[Phone Number]",
+  github: (
+    username: "matthewsanetra",
+    display: "GitHub"
+  ),
+)
+
+= Education
+
+#experience(
+  name: [Bachelor's, Computer Science],
+  where: [University of Oxford],
+  date: [Oct 2022 - Paused],
+)[
+- Computer Science subject representative.
+  - Key contact between students and department staff.
+  - Ensuring feedback and changes improve outcomes for future students.
+- Societies: Rowing, Robotics and Additive Manufacturing, Rocketry.
+- Currently paused studies due to familial matters.
+]
+
+#experience(
+  name: [A Levels],
+  where: [Hammersmith Academy],
+  date: [Sept 2020 - Aug 2022]
+)[
+- Grades: A\*A\*AB in Computer Science, Maths, Further Maths, Physics.
+- Member of the Sixth Form Leadership Team.
+  - Began a successful initiative to reform the dress-code and lateness policy.
+]
+
+= Experience
+
+#experience(
+  name: [Sales Associate],
+  where: [Oddono's Gelati Italiani],
+  date: [July 2022 - Sept 2022]
+)[
+- Demonstrated the ability to serve customers in the busiest shop on Chiswick High Road (>£2000 daily gross revenue, peak #math.approx£7000).
+- Created end-of-day reports, handled cash register accounting, took deliveries, opened and closed shop.
+- Loved working with people, gaining valuable experience working in a tight-knit and highly organised team.
+]
+
+= Projects
+
+#experience(
+  name: [Gana],
+  where: link("https://github.com/thecsw/gana", "thecsw/gana"),
+  date: [Nov 2022 - Present]
+)[
+- Core contributor to a Go generics library
+- Used internally (in a limited fashion) at Microsoft.
+]
+
+#experience(
+  name: [Rocket Guidance Computer],
+  where: [_in Kerbal Space Program_],
+  date: [July 2020 - Present]
+)[
+- Currently developing a compiler for my own domain-specific language with the Rust programming language, targetting kOS Machine Code.
+- Developed rocket guidance that recreates a SpaceX Starship landing.
+  - #link("https://youtu.be/q0dtnMxq4oU","Video 1"), #link("https://youtu.be/szsIL_0m2Qo","Video 2")
+]
+
+#experience(
+  name: [Self-Driving Car],
+  where: [_funded by the Mark Evison Foundation_],
+  date: [May 2021 - Sept 2021]
+)[
+- Collaborated in a group of 6.
+- Implemented a test harness to allow simulating and testing the Raspberry Pi and the immediate surrounding environment, enabling test-driven development of control algorithms.
+- Programmed in Python, utilising OpenCV.
+]
+
+#experience(
+  name: [Racing Boat Autopilot],
+  where: [_IET Faraday Challenge Days_],
+  date: [May 2017 - July 2017]
+)[
+- Competition to develop a product to help the Land Rover BAR team win the America's Cup.
+- Led a team of 6 to place first in the UK.
+- Devised embedded software optimising and balancing speed gain and manual steering ability via sail orientation.
+]
+```
