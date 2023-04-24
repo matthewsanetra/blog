@@ -20,11 +20,4 @@ I can also manually deploy whenever an urgent change is needed.
 ## Defo wants
 
 - [ ] Add estimated reading time
-- [x] Add table of contents
 - [ ] Add bionic reading toggle
-- [x] Add multiple characters
-- [x] Add multiple images/poses per character
-
-## Tentative wants
-
-- [ ] Add dark mode + toggle
