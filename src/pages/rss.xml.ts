@@ -15,7 +15,7 @@ export async function get(context: APIContext) {
       "Hello! I'm a Computer Scientist at Magdalen College, University of Oxford. This is my personal blog - come join me on my adventures!",
     id: site,
     link: site,
-    copyright: `All rights reserved ${year}, Matthew Sanetra`,
+    copyright: `Creative Commons Attribution-ShareAlike 4.0 International License. ${year} Matthew Sanetra`,
     language: "en",
     generator: "Astro",
     author: {
