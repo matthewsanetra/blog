@@ -1,6 +1,8 @@
 import type { CollectionEntry } from "astro:content";
 import { z, getCollection } from "astro:content";
 
+import { Feed } from "feed";
+
 import { sharedSchema } from "./shared";
 
 // Importing with ~alias doesn't work inside content/config.ts for some reason.
@@ -56,6 +58,56 @@ export async function entries() {
   filtered.sort((a, b) => key(b) - key(a));
 
   return filtered;
+}
+
+export async function getFeed(
+  feedNames: { rss: string; atom: string; json: string },
+  site: string
+) {
+  const posts = await entries();
+
+  const feeds = Object.fromEntries(
+    Object.entries(feedNames).map(([type, filename]) => [
+      type,
+      new URL(`/blog/${filename}`, site).href,
+    ])
+  );
+
+  const year = new Date().getUTCFullYear();
+
+  const feed = new Feed({
+    title: "Matthew Sanetra's Blog",
+    description:
+      "Hello! I'm a Computer Scientist at Magdalen College, University of Oxford. This is my personal blog - come join me on my adventures!",
+    id: site,
+    link: site,
+    copyright: `Creative Commons Attribution-ShareAlike 4.0 International License. ${year} Matthew Sanetra`,
+    language: "en",
+    generator: "Astro",
+    author: {
+      name: "Matthew Sanetra",
+      email: "matthewsanetra@gmail.com",
+    },
+    feedLinks: feeds,
+  });
+
+  for (const { data, slug } of posts) {
+    feed.addItem({
+      title: data.heading,
+      link: new URL(`/blog/${slug}/`, site).href,
+      description: data.meta.description,
+      date: data.meta.lastModified ?? data.date,
+      published: data.date,
+      author: [
+        {
+          name: "Matthew Sanetra",
+          email: "matthewsanetra@gmail.com",
+        },
+      ],
+    });
+  }
+
+  return feed;
 }
 
 function ignore(post: BlogEntry): boolean {
